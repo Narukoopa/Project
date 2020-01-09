@@ -11,8 +11,13 @@ public class EnemyBehaviour : MonoBehaviour
 
     private Player playerScript;
 
+    Items items;
+
+    public int itemIndex = 0;
+
     void Start()
     {
+        items = GameObject.FindGameObjectWithTag("World").GetComponent<Items>();
         player = GameObject.FindGameObjectWithTag("Player"); //FIND OBJECT TAGGED PLAYER, SET "player" TO IT
         navAgent = GetComponent<NavMeshAgent>(); //FIND THE "NavMeshAgent" COMPONENT ON THIS OBJECT
         playerScript = player.GetComponent<Player>(); //FIND THE "Player" SCRIPT ON "player"
@@ -34,8 +39,17 @@ public class EnemyBehaviour : MonoBehaviour
 
     IEnumerator DealDamage()
     {
-        //PERFORM A SWING ANIMATION HERE
-        playerScript.DamagePlayer(1);
-        yield return new WaitForSeconds(0.5f); //ENSURE THE ENEMY DOES NOT CONTSTANTLY SWING
+        float itemDurability = items.itemArray[itemIndex].damageValue;
+        if (itemDurability != 0)
+        {
+            //PERFORM A SWING ANIMATION HERE
+            playerScript.DamagePlayer(items.itemArray[itemIndex].damageValue);
+
+            yield return new WaitForSeconds(10.0f); //ENSURE THE ENEMY DOES NOT CONTSTANTLY SWING
+        } 
+        else
+        {
+            yield return null;
+        }
     }
 }
