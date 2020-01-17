@@ -14,13 +14,21 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        
-        text.text = "Gold: " + gold + "\nXP: " + experience;
+        text.text = "Gold: " + gold + "\nXP: " + experience +"\nHealth: " + health;
     }
 
     public void DamagePlayer(float value) 
     {
-        health = (health - value); 
+        if(health > 0)
+        {
+            health = (health - value);
+            Debug.Log(health);
+        }
+        if(health <= 0)
+        {
+            Debug.Log("Player Death!");
+        }
+        
     }
 
     public void AwardGold(int value)

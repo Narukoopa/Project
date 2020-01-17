@@ -14,6 +14,5 @@ public class ItemType
     public string itemName;
     public Sprite icon;
     public float damageValue;
-    public float durability;
     public float itemValue;
 }

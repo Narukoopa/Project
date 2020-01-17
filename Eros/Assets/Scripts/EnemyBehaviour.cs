@@ -33,23 +33,14 @@ public class EnemyBehaviour : MonoBehaviour
 
         if(distanceToPlayer < 2)
         {
-            StartCoroutine("DealDamage");
+            StartCoroutine("DealDamage"); //BEGIN OUR CO-ROUTINE TO DAMAGE THE PLAYER
         }
     }
 
     IEnumerator DealDamage()
-    {
-        float itemDurability = items.itemArray[itemIndex].damageValue;
-        if (itemDurability != 0)
-        {
-            //PERFORM A SWING ANIMATION HERE
-            playerScript.DamagePlayer(items.itemArray[itemIndex].damageValue);
-
-            yield return new WaitForSeconds(10.0f); //ENSURE THE ENEMY DOES NOT CONTSTANTLY SWING
-        } 
-        else
-        {
-            yield return null;
-        }
+    {   
+        //PERFORM A SWING ANIMATION HERE
+        playerScript.DamagePlayer(items.itemArray[itemIndex].damageValue); //DAMAGE THE PLAYER BY THE VALUE OF THE SELECTED WEAPON'S DAMAGE AMOUNT
+        yield return new WaitForSeconds(10.0f); //ENSURE THE ENEMY DOES NOT CONTSTANTLY SWING
     }
 }
