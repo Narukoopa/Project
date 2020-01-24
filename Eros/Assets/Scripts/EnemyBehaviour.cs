@@ -14,6 +14,7 @@ public class EnemyBehaviour : MonoBehaviour
     Items items;
 
     public int itemIndex = 0;
+    private float health = 100.0f;
 
     void Start()
     {
@@ -23,7 +24,6 @@ public class EnemyBehaviour : MonoBehaviour
         playerScript = player.GetComponent<Player>(); //FIND THE "Player" SCRIPT ON "player"
     }
 
-    
     void Update()
     {
         float distanceToPlayer = Vector3.Distance(player.transform.position, this.transform.position); //CALCULATE THE DISTANCE BETWEEN THE OBJECTS, STORE DISTANCE IN "distanceToPlayer"
@@ -35,6 +35,19 @@ public class EnemyBehaviour : MonoBehaviour
         {
             StartCoroutine("DealDamage"); //BEGIN OUR CO-ROUTINE TO DAMAGE THE PLAYER
         }
+    }
+
+    public void DamageEnemy(float value)
+    {
+        if (health > 0)
+        {
+            health = (health - value);
+        }
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     IEnumerator DealDamage()
