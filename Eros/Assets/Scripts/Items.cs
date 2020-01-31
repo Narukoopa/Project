@@ -13,6 +13,7 @@ public class ItemType
 {
     public string itemName;
     public Sprite icon;
+    public GameObject obj;
     public float damageValue;
     public float itemValue;
 }
