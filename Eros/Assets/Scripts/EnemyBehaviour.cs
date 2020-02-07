@@ -14,7 +14,11 @@ public class EnemyBehaviour : MonoBehaviour
     Items items;
 
     public int itemIndex = 0;
+
+    [SerializeField]
     private float health = 100.0f;
+
+    private bool coroutineRunning = false;
 
     void Start()
     {
@@ -28,12 +32,17 @@ public class EnemyBehaviour : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(player.transform.position, this.transform.position); //CALCULATE THE DISTANCE BETWEEN THE OBJECTS, STORE DISTANCE IN "distanceToPlayer"
 
-        if(distanceToPlayer < 15)
-            navAgent.SetDestination(player.transform.position); //SET THE AI DESTINATION TO THE PLAYER'S TRANSFORM
-
-        if(distanceToPlayer < 2)
+        if (distanceToPlayer < 15 && distanceToPlayer > 2)
         {
-            StartCoroutine("DealDamage"); //BEGIN OUR CO-ROUTINE TO DAMAGE THE PLAYER
+            navAgent.Resume();
+            navAgent.SetDestination(player.transform.position); //SET THE AI DESTINATION TO THE PLAYER'S TRANSFORM
+        }
+
+        if(distanceToPlayer < 2.5)
+        {
+            navAgent.Stop();
+            if(!coroutineRunning)
+                StartCoroutine("DealDamage"); //BEGIN OUR CO-ROUTINE TO DAMAGE THE PLAYER
         }
     }
 
@@ -51,9 +60,11 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     IEnumerator DealDamage()
-    {   
+    {
+        coroutineRunning = true;
         //PERFORM A SWING ANIMATION HERE
         playerScript.DamagePlayer(items.itemArray[itemIndex].damageValue); //DAMAGE THE PLAYER BY THE VALUE OF THE SELECTED WEAPON'S DAMAGE AMOUNT
-        yield return new WaitForSeconds(10.0f); //ENSURE THE ENEMY DOES NOT CONTSTANTLY SWING
+        yield return new WaitForSeconds(items.itemArray[itemIndex].attackSpeed); //ENSURE THE ENEMY DOES NOT CONTSTANTLY SWING
+        coroutineRunning = false;
     }
 }

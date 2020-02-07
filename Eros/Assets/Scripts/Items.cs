@@ -15,5 +15,6 @@ public class ItemType
     public Sprite icon;
     public GameObject obj;
     public float damageValue;
+    public float attackSpeed;
     public float itemValue;
 }
