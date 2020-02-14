@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
         if(health <= 0)
         {
+            healthBar.gameObject.SetActive(false);
             Debug.Log("Player Death!");
         }
 

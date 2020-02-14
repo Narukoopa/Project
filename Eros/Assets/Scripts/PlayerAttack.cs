@@ -5,11 +5,7 @@ using UnityEngine.Animations;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private GameObject rotation;
-    public float rotationSpeed;
-
     public GameObject enemy;
-    private EnemyBehaviour enemyBehaviour;
 
     public Animation swordSwing;
 
@@ -19,8 +15,6 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
-        rotation = GameObject.Find("RotationPoint");
-        enemyBehaviour = enemy.GetComponent<EnemyBehaviour>();
         items = GameObject.FindGameObjectWithTag("World").GetComponent<Items>();
     }
 
@@ -28,15 +22,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            StartCoroutine("Swing");
+            Debug.Log("Swing!");
+            swordSwing.Play();
         }
     }
 
-    IEnumerator Swing()
-    {
-        Debug.Log("Swing!");
-        swordSwing.Play();
-        enemyBehaviour.DamageEnemy(items.itemArray[playerItemIndex].damageValue);
-        return null;
-    }
 }
