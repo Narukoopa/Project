@@ -47,7 +47,7 @@ public class EnemyBehaviour : MonoBehaviour
                 StartCoroutine("DealDamage"); //BEGIN OUR CO-ROUTINE TO DAMAGE THE PLAYER
         }
 
-        if (distanceToPlayer < 2.5)
+        if (distanceToPlayer < 1.5)
         {
             if (Input.GetMouseButtonDown(0))
             {

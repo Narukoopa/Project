@@ -17,6 +17,15 @@ public class Player : MonoBehaviour
     private void Update()
     {
         text.text = "Gold: " + gold + "\nXP: " + experience;
+
+        if (health > 50)
+            fill.color = Color.green;
+
+        if (health < 50 && health > 20)
+            fill.color = Color.yellow;
+
+        if (health < 20)
+            fill.color = Color.red;
     }
 
     public void DamagePlayer(float value) 
@@ -32,15 +41,16 @@ public class Player : MonoBehaviour
             healthBar.gameObject.SetActive(false);
             Debug.Log("Player Death!");
         }
+    }
 
-        if (health > 50)
-            fill.color = Color.green;
+    public void HealPlayer(float value)
+    {
+        health = (health + value);
 
-        if (health < 50 && health > 20)
-            fill.color = Color.yellow;
+        if (health > 100)
+            health = 100;
 
-        if (health < 20)
-            fill.color = Color.red;
+        healthBar.value = health / 100;
     }
 
     public void AwardGold(int value)

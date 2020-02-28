@@ -13,9 +13,15 @@ public class PlayerAttack : MonoBehaviour
 
     public int playerItemIndex = 0;
 
+    private GameObject toolbar;
+    private Toolbar toolScript;
+
     void Start()
     {
         items = GameObject.FindGameObjectWithTag("World").GetComponent<Items>();
+
+        toolbar = GameObject.FindGameObjectWithTag("Toolbar");
+        toolScript = toolbar.GetComponent<Toolbar>();
     }
 
     void Update()
@@ -25,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
             Debug.Log("Swing!");
             swordSwing.Play();
         }
+        playerItemIndex = toolScript.slotIndex;
     }
 
 }

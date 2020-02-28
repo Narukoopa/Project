@@ -9,22 +9,26 @@ public class Toolbar : MonoBehaviour
     public Player player;
 
     public RectTransform highlight;
-    private int slotIndex = 0;
+    public int slotIndex = 0;
     public ItemSlot[] itemSlots;
+
+    public GameObject[] weapons;
+
+    public Text[] levelText;
 
     void Start()
     {
         world = GameObject.Find("World").GetComponent<Items>();
 
-        foreach (ItemSlot slot in itemSlots)
-        {
-            slot.icon.sprite = world.itemArray[slot.itemID].icon;
-            slot.icon.enabled = true;
-        }
+        highlight.position = itemSlots[0].icon.transform.position;
     }
 
     void Update()
     {
+        levelText[0].text = world.itemArray[slotIndex].level.ToString();
+        levelText[1].text = world.itemArray[slotIndex].level.ToString();
+        levelText[2].text = world.itemArray[slotIndex].level.ToString();
+
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
         if (scroll != 0)
@@ -47,6 +51,25 @@ public class Toolbar : MonoBehaviour
             }
 
             highlight.position = itemSlots[slotIndex].icon.transform.position;
+        }
+
+        if(slotIndex == 2)
+        {
+            weapons[0].SetActive(true);
+            weapons[1].SetActive(false);
+            weapons[2].SetActive(false);
+        }
+        else if(slotIndex == 3)
+        {
+            weapons[0].SetActive(false);
+            weapons[1].SetActive(true);
+            weapons[2].SetActive(false);
+        }
+        else if (slotIndex == 4)
+        {
+            weapons[0].SetActive(false);
+            weapons[1].SetActive(false);
+            weapons[2].SetActive(true);
         }
     }
 }
