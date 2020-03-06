@@ -53,23 +53,47 @@ public class Toolbar : MonoBehaviour
             highlight.position = itemSlots[slotIndex].icon.transform.position;
         }
 
-        if(slotIndex == 2)
-        {
-            weapons[0].SetActive(true);
-            weapons[1].SetActive(false);
-            weapons[2].SetActive(false);
-        }
-        else if(slotIndex == 3)
-        {
-            weapons[0].SetActive(false);
-            weapons[1].SetActive(true);
-            weapons[2].SetActive(false);
-        }
-        else if (slotIndex == 4)
-        {
-            weapons[0].SetActive(false);
-            weapons[1].SetActive(false);
-            weapons[2].SetActive(true);
+        switch (slotIndex) {
+            case 0:
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(false);
+                weapons[2].SetActive(false);
+                weapons[3].SetActive(false);
+                weapons[4].SetActive(true);
+                break;
+
+            case 1:
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(false);
+                weapons[2].SetActive(false);
+                weapons[3].SetActive(true);
+                weapons[4].SetActive(false);
+                break;
+        
+
+            case 2:
+                weapons[0].SetActive(true);
+                weapons[1].SetActive(false);
+                weapons[2].SetActive(false);
+                weapons[3].SetActive(false);
+                weapons[4].SetActive(false);
+                break;
+
+            case 3:
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(true);
+                weapons[2].SetActive(false);
+                weapons[3].SetActive(false);
+                weapons[4].SetActive(false);
+                break;
+
+            case 4:
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(false);
+                weapons[2].SetActive(true);
+                weapons[3].SetActive(false);
+                weapons[4].SetActive(false);
+                break;
         }
     }
 }
