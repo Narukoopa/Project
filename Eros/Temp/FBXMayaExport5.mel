@@ -1,0 +1,22 @@
+print "Starting maya loading and fbx conversion \n";
+	
+if (`file -q -exists "C:/Users/Josh/Desktop/EBLFIN~1/Eros/Assets/RESOUR~1/ENVIRO~1/Tower.ma"`)
+{		
+	file -o "C:/Users/Josh/Desktop/EBLFIN~1/Eros/Assets/RESOUR~1/ENVIRO~1/Tower.ma";
+	FBXExportEmbeddedTextures -v false;
+	// FBXExportHardEdges -v true;
+	FBXExportApplyConstantKeyReducer -v false;
+	FBXExportShowUI -v false;
+
+	print "Before fbx export\n";
+	FBXExport -f "C:/Users/Josh/Desktop/EBLFIN~1/Eros/Temp/ExportedFBXFile.fbx";
+	print "after fbx export\n";
+}
+else
+	print "Could not open Maya file.";
+
+sysFile -delete "C:/Users/Josh/Desktop/EBLFIN~1/Eros/Temp/CommandPipe";
+
+$donepipeKill = `fopen "C:/Users/Josh/Desktop/EBLFIN~1/Eros/Temp/SyncPipeKill" "w"`;
+fwrite $donepipeKill "Done";
+fclose $donepipeKill;

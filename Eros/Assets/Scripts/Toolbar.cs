@@ -14,21 +14,15 @@ public class Toolbar : MonoBehaviour
 
     public GameObject[] weapons;
 
-    public Text[] levelText;
-
     void Start()
     {
-        world = GameObject.Find("World").GetComponent<Items>();
+        world = GameObject.Find("ITEM CONTAINER").GetComponent<Items>();
 
         highlight.position = itemSlots[0].icon.transform.position;
     }
 
     void Update()
     {
-        levelText[0].text = world.itemArray[slotIndex].level.ToString();
-        levelText[1].text = world.itemArray[slotIndex].level.ToString();
-        levelText[2].text = world.itemArray[slotIndex].level.ToString();
-
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
         if (scroll != 0)

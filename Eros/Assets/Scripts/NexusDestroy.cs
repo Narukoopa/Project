@@ -5,7 +5,7 @@ using UnityEngine;
 public class NexusDestroy : MonoBehaviour
 {
     private bool isRunning = false;
-    private int health = 2000;
+    private int health = 200;
 
     private void OnTriggerStay(Collider other)
     {
@@ -28,8 +28,8 @@ public class NexusDestroy : MonoBehaviour
         if (health <= 0)
             Destroy(this.gameObject);
 
-        health -= 20;
-        yield return new WaitForSeconds(0.001f);
+        health -= 10;
+        yield return new WaitForSeconds(0.01f);
         isRunning = false;
     }
 }
